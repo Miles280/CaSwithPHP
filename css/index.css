@@ -1,0 +1,97 @@
+body {
+  font-family: "Cinzel", serif;
+  background-color: #1e1a2b;
+  color: white;
+  margin: 0;
+  padding: 0;
+
+  header {
+    background-color: #3d2c5e;
+    padding: 20px;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #c084fc;
+    }
+
+    nav {
+      margin-top: 10px;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      li {
+        display: inline;
+      }
+
+      a {
+        color: #c084fc;
+        text-decoration: none;
+        font-size: 1.2em;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #8b5cf6;
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+
+    .intro {
+      background-color: #2a1f44;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 500px;
+      box-shadow: 0 0 15px rgba(190, 140, 255, 0.2);
+
+      h2 {
+        font-size: 2em;
+        color: #8b5cf6;
+      }
+
+      p {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+      }
+
+      .btn-primary {
+        display: inline-block;
+        background-color: #8b5cf6;
+        color: white;
+        padding: 12px 25px; /* Augmenter les paddings pour un bouton plus visible */
+        font-size: 1.3em;
+        text-decoration: none;
+        border-radius: 8px;
+        transition: background-color 0.3s;
+        margin-top: 20px; /* Espacement au-dessus du bouton */
+      }
+
+      .btn-primary:hover {
+        background-color: #7c3aed;
+      }
+    }
+  }
+
+  footer {
+    background-color: #3d2c5e;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+  }
+}

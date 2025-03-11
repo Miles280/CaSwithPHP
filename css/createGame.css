@@ -1,0 +1,160 @@
+body {
+  font-family: "Cinzel", serif;
+  background-color: #1e1a2b;
+  color: white;
+  margin: 0;
+  padding: 0;
+
+  header {
+    background-color: #3d2c5e;
+    padding: 20px;
+    text-align: center;
+
+    h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #c084fc;
+    }
+
+    nav {
+      margin-top: 10px;
+
+      ul {
+        list-style-type: none;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+      }
+
+      li {
+        display: inline;
+      }
+
+      a {
+        color: #c084fc;
+        text-decoration: none;
+        font-size: 1.2em;
+        transition: color 0.3s;
+
+        &:hover {
+          color: #8b5cf6;
+        }
+      }
+    }
+  }
+
+  main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    text-align: center;
+    padding: 25px;
+
+    .create-game {
+      background-color: #2a1f44;
+      padding: 30px;
+      border-radius: 15px;
+      width: 80%;
+      max-width: 900px;
+      box-shadow: 0 0 15px rgba(190, 140, 255, 0.2);
+
+      h2 {
+        font-size: 2em;
+        color: #8b5cf6;
+      }
+
+      p {
+        font-size: 1.1em;
+        margin-bottom: 20px;
+      }
+
+      .game-mode,
+      .game-id {
+        margin-bottom: 20px;
+      }
+
+      .game-mode select,
+      .game-id input {
+        padding: 10px;
+        margin-right: 10px;
+        background-color: #2a1f44;
+        color: white;
+        border: 1px solid #3d2c5e;
+        border-radius: 5px;
+      }
+
+      .game-id button {
+        padding: 10px 20px;
+        background-color: #8b5cf6;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #7c3aed;
+        }
+      }
+
+      .contenu {
+        display: flex;
+        gap: 20px;
+      }
+
+      .form-section {
+        flex: 0 0 60%;
+        background-color: #3c2848;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(190, 140, 255, 0.1);
+
+        label {
+          font-size: 1.1em;
+          color: #c084fc;
+        }
+
+        select {
+          width: 100%;
+          padding: 10px;
+          margin-top: 10px;
+          background-color: #2a1f44;
+          color: white;
+          border: 1px solid #3d2c5e;
+          border-radius: 5px;
+        }
+
+        .role-summary {
+          margin-top: 20px;
+        }
+      }
+
+      .player-list {
+        flex: 0 0 35%;
+        background-color: #3c2848;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(190, 140, 255, 0.1);
+
+        ul {
+          list-style-type: none;
+          padding: 0;
+        }
+
+        li {
+          margin: 10px 0;
+        }
+      }
+    }
+  }
+
+  footer {
+    background-color: #3d2c5e;
+    text-align: center;
+    padding: 10px;
+    margin-top: 20px;
+    width: 100%;
+  }
+}
