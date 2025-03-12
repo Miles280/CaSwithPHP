@@ -16,6 +16,12 @@
             <ul>
                 <li><a href="login.php">Se connecter</a></li>
                 <li><a href="signup.php">S'inscrire</a></li>
+                <?php
+                session_start();
+                if (isset($_SESSION["username"])) {
+                    echo "<li><a href='logout.php'>Déconnexion</a></li>";
+                }
+                ?>
             </ul>
         </nav>
     </header>

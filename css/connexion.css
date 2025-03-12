@@ -36,6 +36,12 @@ body {
           text-align: center;
         }
 
+        p {
+          color: rgb(224, 13, 13);
+          font-size: small;
+          margin: 0px;
+        }
+
         button {
           background-color: #8b5cf6;
           color: white;
