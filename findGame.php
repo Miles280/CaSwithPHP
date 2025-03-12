@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/gameManagement.css">
+    <link rel="stylesheet" href="css/findGame.css">
     <title>Gestion des Parties</title>
 </head>
 
@@ -34,19 +34,19 @@
                         <tr>
                             <th>Nom de la partie</th>
                             <th>Mode</th>
-                            <th>Statut</th>
+                            <th>Camp victorieux</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Chasse aux Sorcières #1</td>
                             <td>Obscur</td>
-                            <td>Terminé</td>
+                            <td>Villageois</td>
                         </tr>
                         <tr>
                             <td>Chasse aux Sorcières #2</td>
                             <td>Standard</td>
-                            <td>Terminé</td>
+                            <td>Sorcières</td>
                         </tr>
                         <!-- Autres anciennes parties -->
                     </tbody>
