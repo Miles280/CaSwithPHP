@@ -5,45 +5,6 @@ body {
   margin: 0;
   padding: 0;
 
-  header {
-    background-color: #3d2c5e;
-    padding: 20px;
-    text-align: center;
-
-    h1 {
-      margin: 0;
-      font-size: 2.5em;
-      color: #c084fc;
-    }
-
-    nav {
-      margin-top: 10px;
-
-      ul {
-        list-style-type: none;
-        padding: 0;
-        display: flex;
-        justify-content: center;
-        gap: 20px;
-      }
-
-      li {
-        display: inline;
-      }
-
-      a {
-        color: #c084fc;
-        text-decoration: none;
-        font-size: 1.2em;
-        transition: color 0.3s;
-      }
-
-      a:hover {
-        color: #8b5cf6;
-      }
-    }
-  }
-
   main {
     display: flex;
     justify-content: center;
@@ -85,13 +46,5 @@ body {
         background-color: #7c3aed;
       }
     }
-  }
-
-  footer {
-    background-color: #3d2c5e;
-    text-align: center;
-    padding: 10px;
-    margin-top: 20px;
-    width: 100%;
   }
 }

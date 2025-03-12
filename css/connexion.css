@@ -1,21 +1,16 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Cinzel", serif;
   background-color: #1e1a2b;
   color: white;
   text-align: center;
   margin: 0;
   padding: 0;
-
-  header {
-    background-color: #3d2c5e;
-    padding: 20px;
-    h1 {
-      margin: 0;
-      font-size: 2em;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 
   main {
+    flex: 1;
     .auth {
       background-color: #2a1f44;
       padding: 20px;
