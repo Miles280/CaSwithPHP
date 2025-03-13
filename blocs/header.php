@@ -42,6 +42,7 @@ require_once("blocs/classes.php");
                 background-color: #3d2c5e;
                 padding: 10px;
                 text-align: center;
+                margin-bottom: 20px;
 
                 h1 {
                     margin: 0;

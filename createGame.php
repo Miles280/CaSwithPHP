@@ -2,12 +2,13 @@
 $cssCustom = "createGame.css";
 $title = "Créer une Partie";
 require_once("blocs/header.php");
-require_once("blocs/connectDB.php");
+require_once("blocs/classes.php");
 ?>
 
 <?php
 $user = new User();
 $user->verifySessionMJ();
+var_dump($_POST);
 ?>
 
 <section class="create-game">
@@ -34,51 +35,52 @@ $user->verifySessionMJ();
         <!-- Formulaire de Sélection des Rôles -->
         <div class="form-container">
             <div class="form-section">
-                <label for="roles-sorcerers">Sélectionner les Sorcières</label>
-                <select id="roles-sorcerers" multiple>
-                    <option value="sorcerer1">Sorcière 1</option>
-                    <option value="sorcerer2">Sorcière 2</option>
-                    <option value="sorcerer3">Sorcière 3</option>
-                    <option value="sorcerer1">Sorcière 1</option>
-                    <option value="sorcerer2">Sorcière 2</option>
-                    <option value="sorcerer3">Sorcière 3</option>
-                    <option value="sorcerer1">Sorcière 1</option>
-                    <option value="sorcerer2">Sorcière 2</option>
-                    <option value="sorcerer3">Sorcière 3</option>
-                </select>
+                <form method="POST" action="createGame.php">
+                    <label for="roles">Sélectionner les Rôles</label>
+                    <select name="roles[]" multiple size="6">
+                        <optgroup label="Sorcères">
+                            <?php
+                            $roleManaged = new Role();
+                            $roles = $roleManaged->getRolesByCamp("sorcieres");
+                            foreach ($roles as $role) { ?>
+                                <option value="<?= $role["nom"] ?>"><?= $role["nom"] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </optgroup>
 
-                <label for="roles-villagers">Sélectionner les Villageois</label>
-                <select id="roles-villagers" multiple>
-                    <option value="villager1">Villageois 1</option>
-                    <option value="villager2">Villageois 2</option>
-                    <option value="villager3">Villageois 3</option>
-                    <option value="villager1">Villageois 1</option>
-                    <option value="villager2">Villageois 2</option>
-                    <option value="villager3">Villageois 3</option>
-                    <option value="villager1">Villageois 1</option>
-                    <option value="villager2">Villageois 2</option>
-                    <option value="villager3">Villageois 3</option>
-                </select>
+                        <optgroup label="Villageois">
+                            <?php
+                            $roleManaged = new Role();
+                            $roles = $roleManaged->getRolesByCamp("villageois");
+                            foreach ($roles as $role) { ?>
+                                <option value="<?= $role["nom"] ?>"><?= $role["nom"] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </optgroup>
 
-                <label for="roles-independents">Sélectionner les Indépendants</label>
-                <select id="roles-independents" multiple>
-                    <option value="independent1">Indépendant 1</option>
-                    <option value="independent2">Indépendant 2</option>
-                    <option value="independent3">Indépendant 3</option>
-                    <option value="independent1">Indépendant 1</option>
-                    <option value="independent2">Indépendant 2</option>
-                    <option value="independent3">Indépendant 3</option>
-                    <option value="independent1">Indépendant 1</option>
-                    <option value="independent2">Indépendant 2</option>
-                    <option value="independent3">Indépendant 3</option>
-                </select>
+                        <optgroup label="Indépendants">
+                            <?php
+                            $roleManaged = new Role();
+                            $roles = $roleManaged->getRolesByCamp("independant");
+                            foreach ($roles as $role) { ?>
+                                <option value="<?= $role["nom"] ?>"><?= $role["nom"] ?></option>
+                            <?php
+                            }
+                            ?>
+                        </optgroup>
+                    </select>
+
+                    <button class="validate-role">Ajouter</button>
+                </form>
+
             </div>
 
+            <!-- Liste des rôles sélectionnés -->
             <div class="role-summary">
-                <h3>Récapitulatif des rôles</h3>
-                <p>Rôle 1: Description</p>
-                <p>Rôle 2: Description</p>
-                <p>Rôle 3: Description</p>
+                <h3>Rôles Sélectionnés</h3>
+                <ul id="selected-roles-list"></ul>
             </div>
         </div>
 
@@ -92,6 +94,7 @@ $user->verifySessionMJ();
             </ul>
         </div>
     </div>
+    <button type="submit" class="launch-game">Lancer la Partie</button>
 </section>
 
 <?php

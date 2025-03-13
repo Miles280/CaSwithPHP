@@ -120,13 +120,12 @@ class Role
         return $role ?: null;
     }
 
-    // Récupération d'un rôle via son id
+    // Récupération de tous les rôles d'un camp
     public function getRolesByCamp(string $camp): array
     {
-        $requete = $this->pdo->prepare("SELECT * FROM user WHERE camp = :camp");
+        $requete = $this->pdo->prepare("SELECT * FROM role WHERE camp = :camp");
         $requete->execute(['camp' => $camp]);
         $roles = $requete->fetchAll();
-
 
         return $roles;
     }
