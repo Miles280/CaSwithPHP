@@ -17,6 +17,21 @@ body {
     min-height: 80vh;
     padding: 20px;
 
+    .link {
+      margin-top: 15px;
+      text-align: center;
+
+      a {
+        color: #c084fc;
+        text-decoration: none;
+        font-size: 0.9em;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
     .join-game {
       background-color: #2a1f44;
       padding: 30px;
@@ -64,19 +79,11 @@ body {
         }
       }
 
-      .create-game-link {
-        margin-top: 15px;
+      .error-message {
+        color: rgb(224, 13, 13);
+        font-size: 12px;
+        margin-top: 5px;
         text-align: center;
-
-        a {
-          color: #c084fc;
-          text-decoration: none;
-          font-size: 0.9em;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
       }
     }
 

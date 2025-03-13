@@ -14,10 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $password = $_POST["password"];
 
     $userManager = new User();
-    $userData = $userManager->getByUsername($username);
-
-    if (!empty($password) && !empty($userData["password"]) && password_verify($password, $userData["password"])) {
-        $_SESSION["username"] = $userData["username"];
+    if ($userManager->login($username, $password)) {
         header("Location: index.php");
         exit();
     } else {

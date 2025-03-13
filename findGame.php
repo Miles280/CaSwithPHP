@@ -19,36 +19,46 @@ $user->verifySession();
 
         <button type="submit">Rejoindre</button>
     </form>
-    <p class="create-game-link"><a href="createGame.php">Créer une nouvelle partie</a></p>
+    <p class="link"><a href="createGame.php">Créer une nouvelle partie</a></p>
+    <?php
+    if (isset($_SESSION['error_message'])) {
+        echo "<div class='error-message'>" . $_SESSION['error_message'] . "</div>";
+        unset($_SESSION['error_message']);
+    }
+    ?>
 </section>
 
 <!-- Section pour les anciennes parties -->
 <section class="old-games">
-    <h2>Anciennes parties</h2>
+    <h2>Historique des parties</h2>
     <div class="game-history">
         <table>
             <thead>
                 <tr>
-                    <th>Nom de la partie</th>
-                    <th>Mode</th>
+                    <th>Date</th>
+                    <th>Mode de jeu</th>
+                    <th>Nombre de joueurs</th>
                     <th>Camp victorieux</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Chasse aux Sorcières #1</td>
-                    <td>Obscur</td>
+                    <td>12/02/25</td>
+                    <td>Composition cachée</td>
+                    <td>12</td>
                     <td>Villageois</td>
                 </tr>
                 <tr>
-                    <td>Chasse aux Sorcières #2</td>
+                    <td>03/02/25</td>
                     <td>Standard</td>
+                    <td>9</td>
                     <td>Sorcières</td>
                 </tr>
                 <!-- Autres anciennes parties -->
             </tbody>
         </table>
     </div>
+    <p class="link"><a href="historique.php">Voir plus</a></p>
 </section>
 
 <?php

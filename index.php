@@ -2,7 +2,9 @@
 $cssCustom = "index.css";
 $title = "Acceuil";
 require_once("blocs/header.php");
-require_once("blocs/connectDB.php");
+require_once("blocs/classes.php");
+
+// var_dump($_SESSION);
 ?>
 
 <section class="intro">

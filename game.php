@@ -5,7 +5,10 @@ require_once("blocs/header.php");
 require_once("blocs/connectDB.php");
 ?>
 
-
+<?php
+$user = new User();
+$user->verifySession();
+?>
 
 <section class="game">
     <h2>Rejoindre une Partie</h2>

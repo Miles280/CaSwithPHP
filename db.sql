@@ -26,9 +26,11 @@ CREATE TABLE game (
 CREATE TABLE role (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(50) NOT NULL,
-    camp ENUM('village', 'sorcières', 'neutre') NOT NULL,
+    camp ENUM('villageois', 'sorcières', 'indépendant') NOT NULL,
     description TEXT
 );
+
+DROP Table role;
 
 -- Table des joueurs dans une partie
 CREATE TABLE player (
@@ -43,6 +45,9 @@ CREATE TABLE player (
 );
 
 
+
+
+
 -- Ajout de joueurs (avec quelques MJ)
 INSERT INTO user (username, password, est_mj) VALUES
 ('Alice', 'motdepasse1', 1),
@@ -53,11 +58,11 @@ INSERT INTO user (username, password, est_mj) VALUES
 
 -- Ajout de rôles
 INSERT INTO role (nom, camp, description) VALUES
-('Villageois', 'village', 'Un simple villageois sans pouvoir particulier.'),
+('Paysan', 'villageois', 'Un simple villageois sans pouvoir particulier.'),
 ('Sorcière', 'sorcières', 'Peut empoisonner un joueur chaque nuit.'),
-('Chasseur', 'village', 'Lorsqu’il meurt, il peut tuer un joueur.'),
-('Voyante', 'village', 'Peut voir le rôle d’un joueur chaque nuit.'),
-('Renégat', 'neutre', 'Doit survivre jusqu’à la fin sans se faire tuer.');
+('Chasseur', 'villageois', 'Lorsqu’il meurt, il peut tuer un joueur.'),
+('Voyante', 'villageois', 'Peut voir le rôle d’un joueur chaque nuit.'),
+('Renégat', 'indépendant', 'Doit survivre jusqu’à la fin sans se faire tuer.');
 
 -- Création de parties
 INSERT INTO game (mode_jeu, statut, mj_id) VALUES

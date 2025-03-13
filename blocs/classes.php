@@ -42,9 +42,26 @@ class User
     // Vérifie si l'utilisateur est connecté
     public static function verifySession(): void
     {
-
         if (!isset($_SESSION['user_id'])) {
             header("Location: login.php");
+            exit();
+        }
+    }
+
+    // Vérifie si l'utilisateur est MJ
+    public static function verifySessionMJ(): void
+    {
+        if (!isset($_SESSION['user_id'])) {
+            header("Location: login.php");
+            exit();
+        }
+
+        $userManaged = new User();
+        $user = $userManaged->getById($_SESSION['user_id']);
+
+        if ($user["est_mj"] != 1) {
+            $_SESSION['error_message'] = "Vous devez être MJ pour accéder à cette page.";
+            header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
         }
     }
@@ -61,13 +78,56 @@ class User
     }
 
     // Récupération d'un utilisateur via son id
-    public function getById(string $id): array
+    public function getById(string $id): ?array
     {
         $requete = $this->pdo->prepare("SELECT * FROM user WHERE id = :id");
         $requete->execute(['id' => $id]);
         $user = $requete->fetch();
 
 
-        return $user;
+        return $user ?: null;
+    }
+}
+
+class Role
+{
+    private PDO $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = Database::getConnection();
+    }
+
+    // Récupération d'un rôle via son nom
+    public function getByName(string $name): ?array
+    {
+        $requete = $this->pdo->prepare("SELECT * FROM user WHERE username = :username");
+        $requete->execute(['username' => $name]);
+        $role = $requete->fetch();
+
+
+        return $role ?: null;
+    }
+
+    // Récupération d'un rôle via son id
+    public function getById(string $id): ?array
+    {
+        $requete = $this->pdo->prepare("SELECT * FROM user WHERE id = :id");
+        $requete->execute(['id' => $id]);
+        $role = $requete->fetch();
+
+
+        return $role ?: null;
+    }
+
+    // Récupération d'un rôle via son id
+    public function getRolesByCamp(string $camp): array
+    {
+        $requete = $this->pdo->prepare("SELECT * FROM user WHERE camp = :camp");
+        $requete->execute(['camp' => $camp]);
+        $roles = $requete->fetchAll();
+
+
+        return $roles;
     }
 }

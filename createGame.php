@@ -5,6 +5,11 @@ require_once("blocs/header.php");
 require_once("blocs/connectDB.php");
 ?>
 
+<?php
+$user = new User();
+$user->verifySessionMJ();
+?>
+
 <section class="create-game">
     <h2>Créer une Partie</h2>
     <p>Configurez votre partie et attribuez les rôles aux joueurs.</p>
