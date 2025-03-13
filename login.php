@@ -2,7 +2,7 @@
 $cssCustom = "connexion.css";
 $title = "Connexion";
 require_once("blocs/header.php");
-require_once("blocs/connectDB.php");
+require_once("blocs/classes.php");
 ?>
 
 <?php
@@ -13,12 +13,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"]);
     $password = $_POST["password"];
 
-    $requete = $pdo->prepare("SELECT * FROM user WHERE username = :username");
-    $requete->execute(["username" => $username]);
-    $user = $requete->fetch(PDO::FETCH_ASSOC);
+    $userManager = new User();
+    $userData = $userManager->getByUsername($username);
 
-    if (!empty($password) && !empty($user["password"]) && password_verify($password, $user["password"])) {
-        $_SESSION["username"] = $user["username"];
+    if (!empty($password) && !empty($userData["password"]) && password_verify($password, $userData["password"])) {
+        $_SESSION["username"] = $userData["username"];
         header("Location: index.php");
         exit();
     } else {

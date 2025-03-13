@@ -2,37 +2,29 @@
 $cssCustom = "connexion.css";
 $title = "Inscription";
 require_once("blocs/header.php");
-require_once("blocs/connectDB.php");
+require_once("blocs/classes.php");
 ?>
 
 <?php
 $errors = [];
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["password"])) {
+    if (empty($_POST["username"]) || empty($_POST["password"]) || empty($_POST["confirmPassword"])) {
         $errors["missing"] = "Le nom d'utilisateur, le mot de passe et la confirmation du mot de passe sont obligatoires.";
     } else {
         $username = trim($_POST["username"]);
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
 
-        $requete = $pdo->prepare("SELECT * FROM user WHERE username = :username");
-        $requete->execute(["username" => $username]);
-        $user = $requete->fetch(PDO::FETCH_ASSOC);
+        $userManager = new User();
+        $userData = $userManager->getByUsername($username);
 
-        if ($user) {
+        if ($userData) {
             $errors["username"] = "Ce nom d'utilisateur est déjà pris.";
         } else if ($password != $confirmPassword) {
             $errors["password"] = "Le mot de passe n'est pas le même.";
         } else {
-            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-            $requete = $pdo->prepare("INSERT INTO user (username, password) VALUES (:username, :password)");
-            $requete->execute([
-                "username" => $username,
-                "password" => $hashedPassword,
-            ]);
-
+            $userManager->register($username, $password);
             $_SESSION["username"] = $username;
             header("Location: index.php");
             exit();

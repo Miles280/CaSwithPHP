@@ -1,3 +1,8 @@
+<?php
+require_once("blocs/classes.php");
+?>
+
+
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -14,10 +19,12 @@
         <h1><a href="index.php">La Chasse aux Sorcières</a></h1>
         <nav>
             <ul>
-                <li><a href="login.php">Se connecter</a></li>
-                <li><a href="signup.php">S'inscrire</a></li>
                 <?php
-                session_start();
+                if (!isset($_SESSION["username"])) {
+                    echo "<li><a href='login.php'>Se connecter</a></li><li><a href='signup.php'>S'inscrire</a></li>";
+                }
+                ?>
+                <?php
                 if (isset($_SESSION["username"])) {
                     echo "<li><a href='logout.php'>Déconnexion</a></li>";
                 }
