@@ -1,4 +1,4 @@
--- Active: 1741689977945@@127.0.0.1@3306
+-- Active: 1741257130793@@127.0.0.1@3306@garage12
 -- Création de la base de données
 CREATE DATABASE chasse_aux_sorcieres;
 USE chasse_aux_sorcieres;
@@ -44,7 +44,14 @@ CREATE TABLE player (
     FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE
 );
 
+CREATE TABLE partie_roles_temp (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    partie_id INT NOT NULL,
+    role VARCHAR(255) NOT NULL,
+    FOREIGN KEY (partie_id) REFERENCES parties(id) ON DELETE CASCADE
+);
 
+DROP TABLE partie_roles_temp;
 
 
 

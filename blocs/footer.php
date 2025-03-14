@@ -14,6 +14,5 @@
         text-align: center;
         padding: 10px;
         margin-top: 20px;
-        width: 100%;
     }
 </style>

@@ -8,7 +8,24 @@ require_once("blocs/classes.php");
 <?php
 $user = new User();
 $user->verifySessionMJ();
-var_dump($_POST);
+
+$game = new Game();
+$game->newGame("Standard", $_SESSION["user_id"]);
+// var_dump($_SESSION);
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    if (isset($_POST["roles"])) {
+        $roles = $_POST["roles"];
+        foreach ($roles as $role) {
+            $game->addRolesToCompo($_SESSION["game_id"], $role);
+        }
+    } else if (isset($_POST["del_role_name"]) && !empty($_POST["del_role_name"])) {
+        $role_id = $_POST["del_role_name"];
+
+        $game->delRolesToCompo($_SESSION["game_id"], $role_id);
+    }
+}
+
 ?>
 
 <section class="create-game">
@@ -80,7 +97,26 @@ var_dump($_POST);
             <!-- Liste des rôles sélectionnés -->
             <div class="role-summary">
                 <h3>Rôles Sélectionnés</h3>
-                <ul id="selected-roles-list"></ul>
+                <?php
+                $rolesManaged = new Role();
+                $roles = $rolesManaged->getAllRolesByGameId($_SESSION["game_id"]);
+
+                if (!empty($roles)) { ?>
+                    <ul id="selected-roles-list">
+                        <?php foreach ($roles as $role) { ?>
+                            <li>
+                                <?= htmlspecialchars($role["role"]) ?>
+                                <form method="POST" action="createGame.php">
+                                    <input type="hidden" name="del_role_name" value="<?= htmlspecialchars($role['role']) ?>">
+                                    <button type="submit">❌</button>
+                                </form>
+                            </li>
+                        <?php } ?>
+                    </ul>
+                <?php } else { ?>
+                    <p>Aucun rôle sélectionné.</p>
+                <?php } ?>
+
             </div>
         </div>
 

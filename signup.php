@@ -25,8 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $errors["password"] = "Le mot de passe n'est pas le même.";
         } else {
             $userManager->register($username, $password);
-            $_SESSION["username"] = $username;
-            header("Location: index.php");
+            header("Location: login.php");
             exit();
         }
     }

@@ -9,4 +9,8 @@ if (isset($_SESSION["username"])) {
     unset($_SESSION["username"]);
 };
 
+if (isset($_SESSION["gameId"])) {
+    unset($_SESSION["gameId"]);
+};
+
 header("location: index.php");

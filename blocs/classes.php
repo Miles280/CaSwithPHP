@@ -59,7 +59,7 @@ class User
         $userManaged = new User();
         $user = $userManaged->getById($_SESSION['user_id']);
 
-        if ($user["est_mj"] != 1) {
+        if ($user["est_mj"] == 0) {
             $_SESSION['error_message'] = "Vous devez être MJ pour accéder à cette page.";
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
@@ -110,7 +110,7 @@ class Role
     }
 
     // Récupération d'un rôle via son id
-    public function getById(string $id): ?array
+    public function getById(int $id): ?array
     {
         $requete = $this->pdo->prepare("SELECT * FROM user WHERE id = :id");
         $requete->execute(['id' => $id]);
@@ -128,5 +128,55 @@ class Role
         $roles = $requete->fetchAll();
 
         return $roles;
+    }
+
+    // Récupération de tous les rôles via l'id d'une game
+    public function getAllRolesByGameId(string $partie_id): ?array
+    {
+        $requete = $this->pdo->prepare("SELECT * FROM partie_roles_temp WHERE partie_id = :partie_id");
+        $requete->execute(['partie_id' => $partie_id,]);
+        $roles = $requete->fetchAll();
+
+        return $roles ?: null;
+    }
+}
+
+class Game
+{
+    private PDO $pdo;
+
+    public function __construct()
+    {
+        $this->pdo = Database::getConnection();
+    }
+
+    // Crée une nouvelle partie
+    public function newGame(string $mode_jeu, int $mj_id): ?bool
+    {
+        if (!isset($_SESSION["game_id"])) {
+            $requete = $this->pdo->prepare("INSERT INTO game (mode_jeu, mj_id) VALUES (:mode_jeu, :mj_id)");
+            $success = $requete->execute(['mode_jeu' => $mode_jeu, 'mj_id' => $mj_id,]);
+
+            if ($success) {
+                $_SESSION["game_id"] = $this->pdo->lastInsertId();
+            }
+
+            return $success;
+        }
+        return null;
+    }
+
+    // Ajout de rôles dans la composition de la partie
+    public function addRolesToCompo(int $partie_id, string $role): bool
+    {
+        $requete = $this->pdo->prepare("INSERT INTO partie_roles_temp (partie_id, role) VALUES (:partie_id, :role)");
+        return $requete->execute(['partie_id' => $partie_id, 'role' => $role]);
+    }
+
+    // Suppression de rôles dans la composition de la partie
+    public function delRolesToCompo(string $partie_id, string $role): bool
+    {
+        $requete = $this->pdo->prepare("DELETE FROM partie_roles_temp WHERE partie_id = :partie_id AND role = :role;");
+        return $requete->execute(['partie_id' => $partie_id, 'role' => $role]);
     }
 }
