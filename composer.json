@@ -1,0 +1,15 @@
+{
+    "name": "hb/ca-s",
+    "autoload": {
+        "psr-4": {
+            "Hb\\CaS\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Miles280",
+            "email": "loughsala.imed@gmail.com"
+        }
+    ],
+    "require": {}
+}
