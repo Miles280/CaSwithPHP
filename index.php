@@ -2,9 +2,11 @@
 $cssCustom = "index.css";
 $title = "Acceuil";
 require_once("blocs/header.php");
-require_once("blocs/classes.php");
+require_once("classes/UserManager.php");
 
-// var_dump($_SESSION);
+// $userManager = new UserManager();
+// $user = $userManager->getById(1);
+// var_dump($user);
 ?>
 
 <section class="intro">

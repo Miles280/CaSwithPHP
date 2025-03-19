@@ -2,12 +2,10 @@
 $cssCustom = "findGame.css";
 $title = "Rejoindre une Partie";
 require_once("blocs/header.php");
-require_once("blocs/classes.php");
-?>
+require_once("classes/UserManager.php");
 
-<?php
-$user = new User();
-$user->verifySession();
+$userManager = new UserManager();
+$userManager->verifySession();
 ?>
 
 <!-- Section pour rejoindre une partie -->

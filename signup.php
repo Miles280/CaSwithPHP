@@ -2,7 +2,7 @@
 $cssCustom = "connexion.css";
 $title = "Inscription";
 require_once("blocs/header.php");
-require_once("blocs/classes.php");
+require_once("classes/UserManager.php");
 ?>
 
 <?php
@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $password = $_POST["password"];
         $confirmPassword = $_POST["confirmPassword"];
 
-        $userManager = new User();
+        $userManager = new UserManager();
         $userData = $userManager->getByUsername($username);
 
         if ($userData) {

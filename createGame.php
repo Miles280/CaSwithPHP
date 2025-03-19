@@ -2,12 +2,12 @@
 $cssCustom = "createGame.css";
 $title = "Créer une Partie";
 require_once("blocs/header.php");
-require_once("blocs/classes.php");
-?>
+require_once("classes/UserManager.php");
+require_once("classes/RoleManager.php");
+require_once("classes/GameManager.php");
 
-<?php
-$user = new User();
-$user->verifySessionMJ();
+$userManager = new UserManager();
+$userManager->verifySession();
 
 $game = new Game();
 $game->newGame("Standard", $_SESSION["user_id"]);
@@ -57,10 +57,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                     <select name="roles[]" multiple size="6">
                         <optgroup label="Sorcères">
                             <?php
-                            $roleManaged = new Role();
+                            $roleManaged = new RoleManager();
                             $roles = $roleManaged->getRolesByCamp("sorcieres");
                             foreach ($roles as $role) { ?>
-                                <option value="<?= $role["nom"] ?>"><?= $role["nom"] ?></option>
+                                <option value="<?= $role->getName() ?>"><?= $role->getName() ?></option>
                             <?php
                             }
                             ?>
@@ -68,10 +68,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         <optgroup label="Villageois">
                             <?php
-                            $roleManaged = new Role();
+                            $roleManaged = new RoleManager();
                             $roles = $roleManaged->getRolesByCamp("villageois");
                             foreach ($roles as $role) { ?>
-                                <option value="<?= $role["nom"] ?>"><?= $role["nom"] ?></option>
+                                <option value="<?= $role->getName() ?>"><?= $role->getName() ?></option>
                             <?php
                             }
                             ?>
@@ -79,10 +79,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                         <optgroup label="Indépendants">
                             <?php
-                            $roleManaged = new Role();
+                            $roleManaged = new RoleManager();
                             $roles = $roleManaged->getRolesByCamp("independant");
                             foreach ($roles as $role) { ?>
-                                <option value="<?= $role["nom"] ?>"><?= $role["nom"] ?></option>
+                                <option value="<?= $role->getName() ?>"><?= $role->getName() ?></option>
                             <?php
                             }
                             ?>
@@ -98,16 +98,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="role-summary">
                 <h3>Rôles Sélectionnés</h3>
                 <?php
-                $rolesManaged = new Role();
+                $rolesManaged = new RoleManager();
                 $roles = $rolesManaged->getAllRolesByGameId($_SESSION["game_id"]);
 
                 if (!empty($roles)) { ?>
                     <ul id="selected-roles-list">
                         <?php foreach ($roles as $role) { ?>
                             <li>
-                                <?= htmlspecialchars($role["role"]) ?>
+                                <?= htmlspecialchars($role->getName()) ?>
                                 <form method="POST" action="createGame.php">
-                                    <input type="hidden" name="del_role_name" value="<?= htmlspecialchars($role['role']) ?>">
+                                    <input type="hidden" name="del_role_name" value="<?= htmlspecialchars($role->getName()) ?>">
                                     <button type="submit">❌</button>
                                 </form>
                             </li>

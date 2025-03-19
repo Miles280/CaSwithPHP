@@ -1,6 +1,6 @@
 <?php
 
-class Database
+class DatabaseManager
 {
     private static ?PDO $pdo = null; // Stocke la connexion PDO
 
@@ -27,3 +27,5 @@ class Database
         return self::$pdo; // Retourne la connexion
     }
 }
+
+session_start();

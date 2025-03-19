@@ -1,5 +1,5 @@
 <?php
-require_once("blocs/classes.php");
+require_once("classes/DatabaseManager.php");
 ?>
 
 

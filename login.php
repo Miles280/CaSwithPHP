@@ -2,7 +2,7 @@
 $cssCustom = "connexion.css";
 $title = "Connexion";
 require_once("blocs/header.php");
-require_once("blocs/classes.php");
+require_once("classes/UserManager.php");
 ?>
 
 <?php
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = trim($_POST["username"]);
     $password = $_POST["password"];
 
-    $userManager = new User();
+    $userManager = new UserManager();
     if ($userManager->login($username, $password)) {
         header("Location: index.php");
         exit();
