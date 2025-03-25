@@ -1,13 +1,3 @@
-<?php
-$cssCustom = "findGame.css";
-$title = "Rejoindre une Partie";
-require_once("blocs/header.php");
-require_once("classes/UserManager.php");
-
-$userManager = new UserManager();
-$userManager->verifySession();
-?>
-
 <!-- Section pour rejoindre une partie -->
 <section class="join-game">
     <h2>Rejoindre une partie</h2>
@@ -17,7 +7,7 @@ $userManager->verifySession();
 
         <button type="submit">Rejoindre</button>
     </form>
-    <p class="link"><a href="createGame.php">Créer une nouvelle partie</a></p>
+    <p class="link"><a href="index.php?action=createGame">Créer une nouvelle partie</a></p>
     <?php
     if (isset($_SESSION['error_message'])) {
         echo "<div class='error-message'>" . $_SESSION['error_message'] . "</div>";
@@ -58,7 +48,3 @@ $userManager->verifySession();
     </div>
     <p class="link"><a href="historique.php">Voir plus</a></p>
 </section>
-
-<?php
-require_once("blocs/footer.php");
-?>

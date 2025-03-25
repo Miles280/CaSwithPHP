@@ -1,31 +1,6 @@
 <?php
-$cssCustom = "createGame.css";
-$title = "Créer une Partie";
-require_once("blocs/header.php");
-require_once("classes/UserManager.php");
-require_once("classes/RoleManager.php");
-require_once("classes/GameManager.php");
 
-$userManager = new UserManager();
-$userManager->verifySession();
-
-$game = new Game();
-$game->newGame("Standard", $_SESSION["user_id"]);
-// var_dump($_SESSION);
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    if (isset($_POST["roles"])) {
-        $roles = $_POST["roles"];
-        foreach ($roles as $role) {
-            $game->addRolesToCompo($_SESSION["game_id"], $role);
-        }
-    } else if (isset($_POST["del_role_name"]) && !empty($_POST["del_role_name"])) {
-        $role_id = $_POST["del_role_name"];
-
-        $game->delRolesToCompo($_SESSION["game_id"], $role_id);
-    }
-}
-
+use App\Manager\RoleManager;
 ?>
 
 <section class="create-game">
@@ -52,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         <!-- Formulaire de Sélection des Rôles -->
         <div class="form-container">
             <div class="form-section">
-                <form method="POST" action="createGame.php">
+                <form method="POST" action="">
                     <label for="roles">Sélectionner les Rôles</label>
                     <select name="roles[]" multiple size="6">
                         <optgroup label="Sorcères">
@@ -106,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <?php foreach ($roles as $role) { ?>
                             <li>
                                 <?= htmlspecialchars($role->getName()) ?>
-                                <form method="POST" action="createGame.php">
+                                <form method="POST" action="">
                                     <input type="hidden" name="del_role_name" value="<?= htmlspecialchars($role->getName()) ?>">
                                     <button type="submit">❌</button>
                                 </form>
@@ -132,7 +107,3 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     </div>
     <button type="submit" class="launch-game">Lancer la Partie</button>
 </section>
-
-<?php
-require_once("blocs/footer.php");
-?>

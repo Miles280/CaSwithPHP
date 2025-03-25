@@ -1,5 +1,7 @@
 <?php
-require_once("classes/DatabaseManager.php");
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 ?>
 
 
@@ -10,7 +12,7 @@ require_once("classes/DatabaseManager.php");
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/<?= $cssCustom ?>?v=<?= time(); ?>">
+    <link rel="stylesheet" href="/CaS/templates/css/<?= $cssCustom ?>?v=<?= time(); ?>">
     <title><?= $title ?> - La Chasse aux Sorcières</title>
 </head>
 
@@ -21,10 +23,10 @@ require_once("classes/DatabaseManager.php");
             <ul>
                 <?php
                 if (!isset($_SESSION["username"])) {
-                    echo "<li><a href='login.php'>Se connecter</a></li><li><a href='signup.php'>S'inscrire</a></li>";
+                    echo "<li><a href='index.php?action=login'>Se connecter</a></li><li><a href='index.php?action=signup'>S'inscrire</a></li>";
                 }
                 if (isset($_SESSION["username"])) {
-                    echo "<li><a href='logout.php'>Déconnexion</a></li>";
+                    echo "<li><a href='index.php?action=logout'>Déconnexion</a></li>";
                 }
                 ?>
             </ul>

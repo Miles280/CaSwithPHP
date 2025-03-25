@@ -1,6 +1,6 @@
 <?php
-require_once("classes/DatabaseManager.php");
 
+namespace App\Model;
 
 class User
 {
@@ -9,7 +9,7 @@ class User
     private string $username;
     private string $password;
     private bool $isMJ;
-    private DateTime $inscriptionDate;
+    private \DateTime $inscriptionDate;
 
     public function __construct(string $username, string $password, bool $isMJ, string $inscriptionDate, ?int $id = null)
     {
@@ -17,7 +17,7 @@ class User
         $this->username = $username;
         $this->password = $password;
         $this->isMJ = $isMJ;
-        $this->inscriptionDate = new DateTime($inscriptionDate);
+        $this->inscriptionDate = new \DateTime($inscriptionDate);
     }
 
 
@@ -64,13 +64,13 @@ class User
     }
 
 
-    public function getInscriptionDate(): DateTime
+    public function getInscriptionDate(): \DateTime
     {
         return $this->inscriptionDate;
     }
 
     public function setInscriptionDate($inscriptionDate): void
     {
-        $this->inscriptionDate = new DateTime($inscriptionDate);
+        $this->inscriptionDate = new \DateTime($inscriptionDate);
     }
 }

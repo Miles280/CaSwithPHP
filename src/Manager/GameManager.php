@@ -1,10 +1,13 @@
 <?php
-require_once("classes/DatabaseManager.php");
-require_once("classes/entities/Game.php");
 
-class Game
+namespace App\Manager;
+
+use App\Manager\DatabaseManager;
+use App\Model\Game;
+
+class GameManager
 {
-    private PDO $pdo;
+    private \PDO $pdo;
 
     public function __construct()
     {
@@ -14,12 +17,12 @@ class Game
     // Crée une nouvelle partie
     public function newGame(string $mode_jeu, int $mj_id): ?bool
     {
-        if (!isset($_SESSION["game_id"])) {
+        if (!isset($_SESSION["gameId"])) {
             $requete = $this->pdo->prepare("INSERT INTO game (mode_jeu, mj_id) VALUES (:mode_jeu, :mj_id)");
             $success = $requete->execute(['mode_jeu' => $mode_jeu, 'mj_id' => $mj_id,]);
 
             if ($success) {
-                $_SESSION["game_id"] = $this->pdo->lastInsertId();
+                $_SESSION["gameId"] = $this->pdo->lastInsertId();
             }
 
             return $success;

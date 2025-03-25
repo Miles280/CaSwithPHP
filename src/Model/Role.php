@@ -1,6 +1,6 @@
 <?php
-require_once("classes/DatabaseManager.php");
 
+namespace App\Model;
 
 class Role
 {

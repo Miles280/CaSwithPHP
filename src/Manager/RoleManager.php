@@ -1,11 +1,15 @@
 <?php
-require_once("classes/DatabaseManager.php");
-require_once("classes/entities/Role.php");
+
+namespace App\Manager;
+
+use App\Manager\DatabaseManager;
+use App\Model\Role;
+use App\Model\User;
 
 
 class RoleManager
 {
-    private PDO $pdo;
+    private \PDO $pdo;
 
     public function __construct()
     {

@@ -1,10 +1,13 @@
 <?php
-require_once("classes/DatabaseManager.php");
-require_once("classes/entities/User.php");
+
+namespace App\Manager;
+
+use App\Manager\DatabaseManager;
+use App\Model\User;
 
 class UserManager
 {
-    private PDO $pdo;
+    private \PDO $pdo;
 
     public function __construct()
     {
@@ -42,7 +45,7 @@ class UserManager
     public static function verifySession(): void
     {
         if (!isset($_SESSION['user_id'])) {
-            header("Location: login.php");
+            header("Location: index.php?action=login");
             exit();
         }
     }
@@ -66,7 +69,10 @@ class UserManager
         $requete->execute(['username' => $username]);
         $userData = $requete->fetch();
 
-        $user = new User($userData["id"], $userData["username"], $userData["password"], $userData["est_mj"], $userData["date_inscription"]);
+        $user = null;
+        if ($userData) {
+            $user = new User($userData["username"], $userData["password"], $userData["est_mj"], $userData["date_inscription"], $userData["id"]);
+        }
         return $user ?: null;
     }
 
@@ -77,7 +83,7 @@ class UserManager
         $requete->execute(['id' => $id]);
         $userData = $requete->fetch();
 
-        $user = new User($userData["id"], $userData["username"], $userData["password"], $userData["est_mj"], $userData["date_inscription"]);
+        $user = new User($userData["username"], $userData["password"], $userData["est_mj"], $userData["date_inscription"], $userData["id"]);
         return $user ?: null;
     }
 }
