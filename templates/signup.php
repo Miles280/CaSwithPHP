@@ -12,5 +12,5 @@
         <button type="submit">S'inscrire</button>
         <?php if (isset($errors["missing"])) echo "<p>" . htmlspecialchars($errors["missing"]) . "</p>"; ?>
     </form>
-    <p>Déjà inscrit ? <a href="login.php">Se connecter</a></p>
+    <p>Déjà inscrit ? <a href="index.php?action=login">Se connecter</a></p>
 </section>

@@ -8,5 +8,5 @@
         <?php if (isset($errors["failed"])) echo "<p>" . htmlspecialchars($errors["failed"]) . "</p>"; ?>
 
     </form>
-    <p>Pas encore inscrit ? <a href="signup.php">S'inscrire</a></p>
+    <p>Pas encore inscrit ? <a href="index.php?action=signup">S'inscrire</a></p>
 </section>

@@ -55,7 +55,10 @@ class UserManager
     {
         self::verifySession();
 
-        if ($_SESSION['user_id'] == 0) {
+        $userManager = new UserManager;
+        $verifyUser = $userManager->getById($_SESSION["user_id"]);
+
+        if ($verifyUser->getIsMJ() == 0) {
             $_SESSION['error_message'] = "Vous devez être MJ pour accéder à cette page.";
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
