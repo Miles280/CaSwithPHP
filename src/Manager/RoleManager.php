@@ -14,6 +14,21 @@ class RoleManager
         $this->pdo = DatabaseManager::getConnection();
     }
 
+    // Récupération de tous les rôles de la BDD
+    public function getAll(): array
+    {
+        $requete = $this->pdo->prepare("SELECT * FROM role");
+        $requete->execute();
+        $roles = $requete->fetchAll();
+
+        $arrayRoles = [];
+        foreach ($roles as $role) {
+            $arrayRoles[] = new Role($role["name"], $role["camp"], $role["description"], $role["id"]);
+        }
+
+        return $arrayRoles;
+    }
+
     // Récupération d'un rôle via son nom
     public function getByName(string $name): ?Role
     {

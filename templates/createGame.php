@@ -6,7 +6,7 @@
     <div class="game-id">
 
         <input type="text" id="game-id" placeholder="ID générée ici" readonly>
-        <button onclick="copyGameId()">Copier ID</button>
+        <button>Copier ID</button>
     </div>
 
     <!-- Section Mode de Jeu -->
@@ -23,7 +23,7 @@
         <div class="form-container">
             <div class="form-section">
                 <form method="POST" action="">
-                    <label for="roles">Sélectionner les Rôles</label>
+                    <h3><label for="roles">Sélectionner les Rôles</label></h3>
                     <select name="roles[]" multiple size="6">
                         <optgroup label="Sorcières">
                             <?php
@@ -60,10 +60,12 @@
             <!-- Liste des rôles sélectionnés -->
             <div class="role-summary">
                 <h3>Rôles Sélectionnés</h3>
-                <?php
-                if (!empty($selectedRoles)) { ?>
-                    <ul id="selected-roles-list">
-                        <?php foreach ($selectedRoles as $role) { ?>
+
+                <ul>
+                    <h4>Sorcières</h4>
+
+                    <?php if (!empty($selectedSorcieresRoles)) {
+                        foreach ($selectedSorcieresRoles as $role) { ?>
                             <li>
                                 <?= htmlspecialchars($role->getName()) ?>
                                 <form method="POST" action="">
@@ -71,11 +73,42 @@
                                     <button type="submit">❌</button>
                                 </form>
                             </li>
-                        <?php } ?>
-                    </ul>
-                <?php } else { ?>
-                    <p>Aucun rôle sélectionné.</p>
-                <?php } ?>
+                        <?php }
+                    } else { ?>
+                        <p>Aucun rôle sélectionné.</p>
+                    <?php } ?>
+
+                    <h4>Villageois</h4>
+
+                    <?php if (!empty($selectedVillageoisRoles)) {
+                        foreach ($selectedVillageoisRoles as $role) { ?>
+                            <li>
+                                <?= htmlspecialchars($role->getName()) ?>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="deleteRole" value="<?= htmlspecialchars($role->getName()) ?>">
+                                    <button type="submit">❌</button>
+                                </form>
+                            </li>
+                        <?php }
+                    } else { ?>
+                        <p>Aucun rôle sélectionné.</p>
+                    <?php } ?>
+
+                    <?php if (!empty($selectedIndependantsRoles)) { ?>
+
+                        <h4>Indépendants</h4>
+
+                        <?php foreach ($selectedIndependantsRoles as $role) { ?>
+                            <li>
+                                <?= htmlspecialchars($role->getName()) ?>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="deleteRole" value="<?= htmlspecialchars($role->getName()) ?>">
+                                    <button type="submit">❌</button>
+                                </form>
+                            </li>
+                    <?php }
+                    } ?>
+                </ul>
 
             </div>
         </div>

@@ -55,6 +55,10 @@ class GameController
         $rolesVillageois = $roleManaged->getRolesByCamp("villageois");
         $rolesIndependants = $roleManaged->getRolesByCamp("independant");
         $selectedRoles = $roleManaged->getAllRolesByGameId($_SESSION["gameId"]);
+        $selectedVillageoisRoles = array_filter($selectedRoles, fn($role) => $role->getCamp() === "villageois");
+        $selectedSorcieresRoles = array_filter($selectedRoles, fn($role) => $role->getCamp() === "sorcieres");
+        $selectedIndependantsRoles = array_filter($selectedRoles, fn($role) => $role->getCamp() === "independant");
+
 
         require_once $_SERVER['DOCUMENT_ROOT'] . '/CaS/templates/createGame.php';
 
