@@ -4,7 +4,7 @@ namespace App\Controller;
 
 class HomeController
 {
-
+    // Page d'acceuil
     public function homePage()
     {
 

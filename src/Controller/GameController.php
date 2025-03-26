@@ -8,7 +8,7 @@ use App\Manager\GameManager;
 
 class GameController
 {
-
+    //Page de recherche de partie
     public function findGame()
     {
         $cssCustom = "findGame.css";
@@ -22,6 +22,7 @@ class GameController
         require_once $_SERVER['DOCUMENT_ROOT'] . '/CaS/templates/blocks/footer.php';
     }
 
+    // Page de création de partie
     public function createGame()
     {
         $cssCustom = "createGame.css";

@@ -6,7 +6,7 @@ use App\Manager\UserManager;
 
 class SecurityController
 {
-
+    // Page d'inscription
     public function register()
     {
         $cssCustom = "connexion.css";
@@ -42,6 +42,7 @@ class SecurityController
         require_once $_SERVER['DOCUMENT_ROOT'] . '/CaS/templates/blocks/footer.php';
     }
 
+    // Page de connection
     public function login()
     {
         $cssCustom = "connexion.css";
@@ -67,6 +68,7 @@ class SecurityController
         require_once $_SERVER['DOCUMENT_ROOT'] . '/CaS/templates/blocks/footer.php';
     }
 
+    // Page de déconnexion
     public function logout()
     {
         require_once $_SERVER['DOCUMENT_ROOT'] . '/CaS/templates/logout.php';
