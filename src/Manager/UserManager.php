@@ -34,7 +34,7 @@ class UserManager
         $user = $requete->fetch();
 
         if ($user && password_verify($password, $user['password'])) {
-            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['userId'] = $user['id'];
             $_SESSION['username'] = $user['username'];
             return true;
         }
@@ -44,7 +44,7 @@ class UserManager
     // Vérifie si l'utilisateur est connecté
     public static function verifySession(): void
     {
-        if (!isset($_SESSION['user_id'])) {
+        if (!isset($_SESSION['userId'])) {
             header("Location: index.php?action=login");
             exit();
         }
@@ -56,9 +56,9 @@ class UserManager
         self::verifySession();
 
         $userManager = new UserManager;
-        $verifyUser = $userManager->getById($_SESSION["user_id"]);
+        $verifyUser = $userManager->getById($_SESSION["userId"]);
 
-        if ($verifyUser->getIsMJ() == 0) {
+        if (!$verifyUser || $verifyUser->getIsMJ() == 0) {
             $_SESSION['error_message'] = "Vous devez être MJ pour accéder à cette page.";
             header("Location: " . $_SERVER['HTTP_REFERER']);
             exit();
@@ -72,11 +72,17 @@ class UserManager
         $requete->execute(['username' => $username]);
         $userData = $requete->fetch();
 
-        $user = null;
-        if ($userData) {
-            $user = new User($userData["username"], $userData["password"], $userData["est_mj"], $userData["date_inscription"], $userData["id"]);
+        if (!$userData) {
+            return null;
         }
-        return $user ?: null;
+
+        return new User(
+            $userData["username"],
+            $userData["password"],
+            $userData["isMj"],
+            $userData["inscriptionDate"],
+            $userData["id"]
+        );
     }
 
     // Récupération d'un utilisateur via son id
@@ -86,7 +92,16 @@ class UserManager
         $requete->execute(['id' => $id]);
         $userData = $requete->fetch();
 
-        $user = new User($userData["username"], $userData["password"], $userData["est_mj"], $userData["date_inscription"], $userData["id"]);
-        return $user ?: null;
+        if (!$userData) {
+            return null;
+        }
+
+        return new User(
+            $userData["username"],
+            $userData["password"],
+            $userData["isMj"],
+            $userData["inscriptionDate"],
+            $userData["id"]
+        );
     }
 }

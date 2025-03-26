@@ -4,8 +4,6 @@ namespace App\Manager;
 
 use App\Manager\DatabaseManager;
 use App\Model\Role;
-use App\Model\User;
-
 
 class RoleManager
 {
@@ -19,28 +17,21 @@ class RoleManager
     // Récupération d'un rôle via son nom
     public function getByName(string $name): ?Role
     {
-        $requete = $this->pdo->prepare("SELECT * FROM role WHERE nom = :nom");
-        $requete->execute(['nom' => $name]);
+        $requete = $this->pdo->prepare("SELECT * FROM role WHERE name = :name");
+        $requete->execute(['name' => $name]);
         $roleData = $requete->fetch();
 
-
-        if ($roleData) {
-            $role = new Role($roleData["nom"], $roleData["camp"], $roleData["description"], $roleData["id"]);
-            return $role;
-        } else {
-            return null;
-        }
+        return $roleData ? new Role($roleData["name"], $roleData["camp"], $roleData["description"], $roleData["id"]) : null;
     }
 
-    // Récupération d'un rôle via son id
-    public function getById(int $id): ?Role
+    // Récupération d'un rôle via son ID
+    public function getById(int $roleId): ?Role
     {
-        $requete = $this->pdo->prepare("SELECT * FROM role WHERE id = :id");
-        $requete->execute(['id' => $id]);
+        $requete = $this->pdo->prepare("SELECT * FROM role WHERE id = :roleId");
+        $requete->execute(['roleId' => $roleId]);
         $roleData = $requete->fetch();
 
-        $role = new User($roleData["id"], $roleData["nom"], $roleData["camp"], $roleData["description"]);
-        return $role ?: null;
+        return $roleData ? new Role($roleData["name"], $roleData["camp"], $roleData["description"], $roleData["id"]) : null;
     }
 
     // Récupération de tous les rôles d'un camp
@@ -52,29 +43,24 @@ class RoleManager
 
         $arrayRoles = [];
         foreach ($roles as $role) {
-            $roleObject = new Role($role["nom"], $role["camp"], $role["description"], $role["id"]);
-            $arrayRoles[] = $roleObject;
+            $arrayRoles[] = new Role($role["name"], $role["camp"], $role["description"], $role["id"]);
         }
 
         return $arrayRoles;
     }
 
-    // Récupération de tous les rôles via l'id d'une game
-    public function getAllRolesByGameId(string $partie_id): ?array
+    // Récupération de tous les rôles d'une partie via son ID
+    public function getAllRolesByGameId(int $gameId): array
     {
-        $requete = $this->pdo->prepare("SELECT * FROM partie_roles_temp WHERE partie_id = :partie_id");
-        $requete->execute(['partie_id' => $partie_id,]);
+        $requete = $this->pdo->prepare("SELECT role.* FROM composition INNER JOIN role ON composition.roleId = role.id WHERE composition.gameId = :gameId");
+        $requete->execute(['gameId' => $gameId]);
         $roles = $requete->fetchAll();
 
         $arrayRoles = [];
-        $roleManager = new RoleManager();
         foreach ($roles as $role) {
-            $roleData = $roleManager->getByName($role["role"]);
-
-            $roleObject = new Role($roleData->getName(), $roleData->getCamp(), $roleData->getDescription(), $roleData->getId());
-            $arrayRoles[] = $roleObject;
+            $arrayRoles[] = new Role($role["name"], $role["camp"], $role["description"], $role["id"]);
         }
 
-        return $arrayRoles ?: null;
+        return $arrayRoles;
     }
 }

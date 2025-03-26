@@ -10,7 +10,7 @@ class DatabaseManager
     {
         if (self::$pdo === null) { // Vérifie si la connexion existe déjà
             $host = 'localhost';
-            $dbName = 'chasse_aux_sorcieres';
+            $dbName = 'chasseAuxSorcieres';
             $user = 'root';
             $password = '';
 

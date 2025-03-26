@@ -1,8 +1,3 @@
-<?php
-
-use App\Manager\RoleManager;
-?>
-
 <section class="create-game">
     <h2>Créer une Partie</h2>
     <p>Configurez votre partie et attribuez les rôles aux joueurs.</p>
@@ -30,23 +25,18 @@ use App\Manager\RoleManager;
                 <form method="POST" action="">
                     <label for="roles">Sélectionner les Rôles</label>
                     <select name="roles[]" multiple size="6">
-                        <optgroup label="Sorcères">
+                        <optgroup label="Sorcières">
                             <?php
-                            $roleManaged = new RoleManager();
-                            $roles = $roleManaged->getRolesByCamp("sorcieres");
-                            foreach ($roles as $role) { ?>
-                                <option value="<?= $role->getName() ?>"><?= $role->getName() ?></option>
+                            foreach ($rolesSorcieres as $role) { ?>
+                                <option value="<?= htmlspecialchars($role->getName()) ?>"><?= htmlspecialchars($role->getName()) ?></option>
                             <?php
                             }
                             ?>
                         </optgroup>
-
                         <optgroup label="Villageois">
                             <?php
-                            $roleManaged = new RoleManager();
-                            $roles = $roleManaged->getRolesByCamp("villageois");
-                            foreach ($roles as $role) { ?>
-                                <option value="<?= $role->getName() ?>"><?= $role->getName() ?></option>
+                            foreach ($rolesVillageois as $role) { ?>
+                                <option value="<?= htmlspecialchars($role->getName()) ?>"><?= htmlspecialchars($role->getName()) ?></option>
                             <?php
                             }
                             ?>
@@ -54,10 +44,8 @@ use App\Manager\RoleManager;
 
                         <optgroup label="Indépendants">
                             <?php
-                            $roleManaged = new RoleManager();
-                            $roles = $roleManaged->getRolesByCamp("independant");
-                            foreach ($roles as $role) { ?>
-                                <option value="<?= $role->getName() ?>"><?= $role->getName() ?></option>
+                            foreach ($rolesIndependants as $role) { ?>
+                                <option value="<?= htmlspecialchars($role->getName()) ?>"><?= htmlspecialchars($role->getName()) ?></option>
                             <?php
                             }
                             ?>
@@ -73,16 +61,13 @@ use App\Manager\RoleManager;
             <div class="role-summary">
                 <h3>Rôles Sélectionnés</h3>
                 <?php
-                $rolesManaged = new RoleManager();
-                $roles = $rolesManaged->getAllRolesByGameId($_SESSION["game_id"]);
-
-                if (!empty($roles)) { ?>
+                if (!empty($selectedRoles)) { ?>
                     <ul id="selected-roles-list">
-                        <?php foreach ($roles as $role) { ?>
+                        <?php foreach ($selectedRoles as $role) { ?>
                             <li>
                                 <?= htmlspecialchars($role->getName()) ?>
                                 <form method="POST" action="">
-                                    <input type="hidden" name="del_role_name" value="<?= htmlspecialchars($role->getName()) ?>">
+                                    <input type="hidden" name="deleteRole" value="<?= htmlspecialchars($role->getName()) ?>">
                                     <button type="submit">❌</button>
                                 </form>
                             </li>

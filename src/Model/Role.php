@@ -4,7 +4,6 @@ namespace App\Model;
 
 class Role
 {
-
     private ?int $id = null;
     private string $name;
     private string $camp;
@@ -19,13 +18,12 @@ class Role
     }
 
 
-
     public function getId(): int
     {
         return $this->id;
     }
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -36,7 +34,7 @@ class Role
         return $this->name;
     }
 
-    public function setName($name): void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
@@ -47,7 +45,7 @@ class Role
         return $this->camp;
     }
 
-    public function setCamp($camp): void
+    public function setCamp(string $camp): void
     {
         $this->camp = $camp;
     }
@@ -58,7 +56,7 @@ class Role
         return $this->description;
     }
 
-    public function setDescription($description): void
+    public function setDescription(string $description): void
     {
         $this->description = $description;
     }

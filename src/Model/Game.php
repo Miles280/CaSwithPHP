@@ -5,18 +5,18 @@ namespace App\Model;
 class Game
 {
     private ?int $id = null;
-    private string $modeJeu;
-    private string $statut;
+    private string $gameMode;
+    private string $status;
     private int $mjId;
-    private \DateTime $dateCreation;
+    private \DateTime $creationDate;
 
-    public function __construct(string $mode_jeu, string $statut, int $mj_id, string $dateCreation, ?int $id = null)
+    public function __construct(string $gameMode, string $status, int $mjId, string $creationDate, ?int $id = null)
     {
         $this->id = $id;
-        $this->modeJeu = $mode_jeu;
-        $this->statut = $statut;
-        $this->mjId = $mj_id;
-        $this->dateCreation = new \DateTime($dateCreation);
+        $this->gameMode = $gameMode;
+        $this->status = $status;
+        $this->mjId = $mjId;
+        $this->creationDate = new \DateTime($creationDate);
     }
 
 
@@ -25,52 +25,52 @@ class Game
         return $this->id;
     }
 
-    public function setId($id): void
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
 
 
-    function getModejeu(): string
+    public function getgameMode(): string
     {
-        return $this->modeJeu;
+        return $this->gameMode;
     }
 
-    function setModejeu($modejeu): void
+    public function setgameMode(string $gameMode): void
     {
-        $this->modeJeu = $modejeu;
-    }
-
-
-    function getStatut(): string
-    {
-        return $this->statut;
-    }
-
-    function setStatut($statut): void
-    {
-        $this->statut = $statut;
+        $this->gameMode = $gameMode;
     }
 
 
-    function getMjid(): int
+    public function getstatus(): string
+    {
+        return $this->status;
+    }
+
+    public function setstatus(string $status): void
+    {
+        $this->status = $status;
+    }
+
+
+    public function getMjId(): int
     {
         return $this->mjId;
     }
 
-    function setMjid($mjid): void
+    public function setMjId(int $mjId): void
     {
-        $this->mjId = $mjid;
+        $this->mjId = $mjId;
     }
 
 
-    public function getDateCreation(): \DateTime
+    public function getcreationDate(): \DateTime
     {
-        return $this->dateCreation;
+        return $this->creationDate;
     }
 
-    public function setDateCreation($dateCreation): void
+    public function setcreationDate(string $creationDate): void
     {
-        $this->dateCreation = new \DateTime($dateCreation);
+        $this->creationDate = new \DateTime($creationDate);
     }
 }

@@ -4,7 +4,6 @@ namespace App\Model;
 
 class User
 {
-
     private ?int $id = null;
     private string $username;
     private string $password;
@@ -25,7 +24,8 @@ class User
     {
         return $this->id;
     }
-    public function setId($id): void
+
+    public function setId(int $id): void
     {
         $this->id = $id;
     }
@@ -36,7 +36,7 @@ class User
         return $this->username;
     }
 
-    public function setUsername($username): void
+    public function setUsername(string $username): void
     {
         $this->username = $username;
     }
@@ -47,7 +47,7 @@ class User
         return $this->password;
     }
 
-    public function setPassword($password): void
+    public function setPassword(string $password): void
     {
         $this->password = password_hash($password, PASSWORD_DEFAULT);
     }
@@ -58,7 +58,7 @@ class User
         return $this->isMJ;
     }
 
-    public function setIsMJ($isMJ): void
+    public function setIsMJ(bool $isMJ): void
     {
         $this->isMJ = $isMJ;
     }
@@ -69,7 +69,7 @@ class User
         return $this->inscriptionDate;
     }
 
-    public function setInscriptionDate($inscriptionDate): void
+    public function setInscriptionDate(string $inscriptionDate): void
     {
         $this->inscriptionDate = new \DateTime($inscriptionDate);
     }
