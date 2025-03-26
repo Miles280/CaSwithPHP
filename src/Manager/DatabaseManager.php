@@ -2,6 +2,7 @@
 
 namespace App\Manager;
 
+// Crée le lien avec ma base de donnée
 class DatabaseManager
 {
     private static ?\PDO $pdo = null; // Stocke la connexion PDO
@@ -30,6 +31,7 @@ class DatabaseManager
     }
 }
 
+// Ouvre la session si ce n'est pas déjà fait
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
