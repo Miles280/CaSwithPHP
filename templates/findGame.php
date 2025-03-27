@@ -3,7 +3,7 @@
     <h2>Rejoindre une partie</h2>
     <form>
         <label for="game-id">ID de la partie</label>
-        <input type="text" id="game-id" placeholder="ID de la partie" required>
+        <input type="text" id="searchGameId" placeholder="ID de la partie" required>
 
         <button type="submit">Rejoindre</button>
     </form>

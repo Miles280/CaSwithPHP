@@ -36,8 +36,8 @@ body {
         display: inline-block;
         background-color: #8b5cf6;
         color: white;
-        padding: 12px 25px; /* Augmenter les paddings pour un bouton plus visible */
-        font-size: 1.3em;
+        padding: 10px 20px; /* Augmenter les paddings pour un bouton plus visible */
+        font-size: 1em;
         text-decoration: none;
         border-radius: 8px;
         transition: background-color 0.3s;
@@ -46,21 +46,6 @@ body {
 
       .btn-primary:hover {
         background-color: #7c3aed;
-      }
-
-      .link {
-        margin-top: 15px;
-        text-align: center;
-
-        a {
-          color: #c084fc;
-          text-decoration: none;
-          font-size: 0.9em;
-
-          &:hover {
-            text-decoration: underline;
-          }
-        }
       }
     }
   }

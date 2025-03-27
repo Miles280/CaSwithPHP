@@ -18,6 +18,8 @@ if (isset($_GET["action"])) {
 
 if ($action === null) {
     $HomeController->homePage();
+} else if ($action === "catalogueRoles") {
+    $HomeController->catalogue();
 } else if ($action === "signup") {
     $SecurityController->register();
 } else if ($action === "login") {
@@ -28,4 +30,6 @@ if ($action === null) {
     $GameController->findGame();
 } else if ($action === "createGame") {
     $GameController->createGame();
+} else if ($action === "detailRole") {
+    $HomeController->detailRole();
 }
