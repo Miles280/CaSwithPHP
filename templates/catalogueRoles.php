@@ -1,9 +1,17 @@
 <!-- Section des boutons -->
 <div class="button-group">
-    <button class="role-btn">Tous les rôles</button>
-    <button class="role-btn">Villageois</button>
-    <button class="role-btn">Sorcières</button>
-    <button class="role-btn">Indépendants</button>
+    <a href="index.php?action=catalogueRoles">
+        <button class="role-btn">Tous les rôles</button>
+    </a>
+    <a href="index.php?action=catalogueRoles&sorter=villageois">
+        <button class="role-btn">Villageois</button>
+    </a>
+    <a href="index.php?action=catalogueRoles&sorter=sorcieres">
+        <button class="role-btn">Sorcières</button>
+    </a>
+    <a href="index.php?action=catalogueRoles&sorter=independants">
+        <button class="role-btn">Indépendants</button>
+    </a>
 </div>
 
 <!-- Section des rôles -->

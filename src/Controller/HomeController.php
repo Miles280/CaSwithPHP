@@ -27,7 +27,18 @@ class HomeController
         $title = "Tous les rôles";
 
         $roleManager = new RoleManager;
-        $roles = $roleManager->getAll();
+        $sorter = isset($_GET["sorter"]) ? $_GET["sorter"] : null;
+
+        if ($sorter === null) {
+            $roles = $roleManager->getAll();
+        } else if ($sorter === "villageois") {
+            $roles = $roleManager->getRolesByCamp("villageois");
+        } else if ($sorter === "sorcieres") {
+            $roles = $roleManager->getRolesByCamp("sorciere");
+        } else if ($sorter === "independants") {
+            $roles = $roleManager->getRolesByCamp("independant");
+        }
+
 
         require_once $_SERVER['DOCUMENT_ROOT'] . '/CaS/templates/blocks/header.php';
 
